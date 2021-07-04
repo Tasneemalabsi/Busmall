@@ -6,6 +6,7 @@ let img2 = document.getElementById('secondImg');
 let img3 = document.getElementById('thirdImg');
 let maxRounds = 25;
 let rounds = 1;
+let currentImg=[];
 
 
 function Solditems(itemName) {
@@ -13,9 +14,12 @@ function Solditems(itemName) {
     this.img = 'img/' + itemName;
     this.clicks=0;
     this.views=0;
+    
     items.push(this);
+    
 
 }
+
 
 let images = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfast.jpg','bubblegum.jpg','chair.jpg','cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg','water-can.jpg','wine-glass.jpg'];
 
@@ -33,17 +37,28 @@ function render() {
     let secondImg = randImg();
     window.secondImg2=secondImg
     let thirdImg = randImg();
-    window.thirdImg2=thirdImg
-    while (firstImg === secondImg || firstImg === thirdImg || secondImg === thirdImg ) {
+    window.thirdImg2=thirdImg;
+    
+    
+   
+    while (firstImg === secondImg || firstImg === thirdImg || secondImg === thirdImg|| currentImg.includes(firstImg) || currentImg.includes(secondImg)|| currentImg.includes(thirdImg)) {
         firstImg = randImg();
         secondImg= randImg();
+        thirdImg=randImg();
+
     }
+    
     img1.setAttribute('src', items[firstImg].img);
     img2.setAttribute('src', items[secondImg].img);
     img3.setAttribute('src', items[thirdImg].img);
     items[firstImg].views++;
     items[secondImg].views++;
     items[thirdImg].views++;
+    currentImg[0]=firstImg
+    currentImg[1]=secondImg;
+     currentImg[2]=thirdImg;
+    
+    
 }
 
 render ();
@@ -55,13 +70,13 @@ function interaction(event) {
 if (rounds<=maxRounds){
     let chosen1=event.target.id;
     if (chosen1==='firstImg') {
-        items[firstImg2].clicks++;
+        items[currentImg[0]].clicks++;
 }
 else if (chosen1==='secondImg') {
-    items[secondImg2].clicks++;
+    items[currentImg[1]].clicks++;
 }
 else if (chosen1==='thirdImg') {
-    items[thirdImg2].clicks++;
+    items[currentImg[2]].clicks++;
 }
 render();
 }
