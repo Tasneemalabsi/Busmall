@@ -70,6 +70,7 @@ else {
     let button = document.getElementById('button');
     button.addEventListener('click',Results);
     function Results(event) {
+        
         let ulEl=document.createElement('ul');
         divEl2.appendChild(ulEl);
         for (let i=0; i<items.length; i++) {
@@ -77,9 +78,11 @@ else {
             liEl.textContent= items[i].name + ' has ' + items[i].clicks+' votes and ' +items[i].views+' views'
             ulEl.appendChild(liEl);
         }
-        
+       button.removeEventListener('click',Results);
     }
-    
+  img1.removeEventListener('click', interaction);
+  img2.removeEventListener('click',interaction);
+  img3.removeEventListener('click',interaction); 
 }
 rounds++;
 }
