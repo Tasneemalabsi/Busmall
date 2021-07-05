@@ -7,6 +7,9 @@ let img3 = document.getElementById('thirdImg');
 let maxRounds = 25;
 let rounds = 1;
 let currentImg=[];
+let names =[];
+let votes=[];
+let shows =[];
 
 
 function Solditems(itemName) {
@@ -16,6 +19,8 @@ function Solditems(itemName) {
     this.views=0;
     
     items.push(this);
+    names.push (this.name);
+
     
 
 }
@@ -33,9 +38,9 @@ function randImg (){
 
 function render() {
     let firstImg = randImg();
-    window.firstImg2=firstImg
+    window.firstImg2=firstImg;
     let secondImg = randImg();
-    window.secondImg2=secondImg
+    window.secondImg2=secondImg;
     let thirdImg = randImg();
     window.thirdImg2=thirdImg;
     
@@ -57,7 +62,7 @@ function render() {
     items[firstImg].views++;
     items[secondImg].views++;
     items[thirdImg].views++;
-    currentImg[0]=firstImg
+    currentImg[0]=firstImg;
     currentImg[1]=secondImg;
      currentImg[2]=thirdImg;
     
@@ -95,12 +100,58 @@ else {
             let liEl=document.createElement('li')
             liEl.textContent= items[i].name + ' has ' + items[i].clicks+' votes and ' +items[i].views+' views'
             ulEl.appendChild(liEl);
+            votes.push(items[i].clicks);
+            shows.push(items[i].views);
         }
+        
        button.removeEventListener('click',Results);
     }
   img1.removeEventListener('click', interaction);
   img2.removeEventListener('click',interaction);
   img3.removeEventListener('click',interaction); 
+  barChart();
+
+  }
+  rounds++;
 }
-rounds++;
+
+function barChart() {
+    let ctx = document.getElementById('barchart').getContext('2d');
+    let barchart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: names,
+            datasets: [{
+                label: 'no. of Votes',
+                data: votes,
+                backgroundColor: [
+                    'rgba(125, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(245, 99, 132, 1)',
+                ],
+                borderWidth: 2
+            },
+            {
+                label: 'no. of views',
+                data: shows,
+                backgroundColor: [
+                    'rgba(210, 110, 90, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(300, 199, 120, 0.2)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            // scales: {
+                // y: {
+                //     beginAtZero: true
+                // }
+            // }
+        }
+    });
 }
+ 
+// barChart();
