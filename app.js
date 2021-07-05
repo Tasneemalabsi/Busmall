@@ -49,8 +49,11 @@ function render() {
     }
     
     img1.setAttribute('src', items[firstImg].img);
+    img1.setAttribute('alt', items[firstImg].name);
     img2.setAttribute('src', items[secondImg].img);
+    img2.setAttribute('alt', items[secondImg].name);
     img3.setAttribute('src', items[thirdImg].img);
+    img3.setAttribute('alt', items[thirdImg].name);
     items[firstImg].views++;
     items[secondImg].views++;
     items[thirdImg].views++;
