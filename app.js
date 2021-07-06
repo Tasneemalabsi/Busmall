@@ -10,6 +10,7 @@ let currentImg=[];
 let names =[];
 let votes=[];
 let shows =[];
+let total=0;
 
 
 function Solditems(itemName) {
@@ -65,9 +66,18 @@ function render() {
     currentImg[0]=firstImg;
     currentImg[1]=secondImg;
      currentImg[2]=thirdImg;
-    
+     if (rounds===maxRounds) {
+        img1.removeEventListener('click', interaction);
+        img2.removeEventListener('click',interaction);
+        img3.removeEventListener('click',interaction);
+         storage1();
+         storage2
+         ulEl2.textContent=null;
+         total = total + ulEl;
+     }
     
 }
+
 
 render ();
 
@@ -95,6 +105,7 @@ else {
     function Results(event) {
         
         let ulEl=document.createElement('ul');
+        window.ulEl2=ulEl;
         divEl2.appendChild(ulEl);
         for (let i=0; i<items.length; i++) {
             let liEl=document.createElement('li')
@@ -113,6 +124,7 @@ else {
 
   }
   rounds++;
+  
 }
 
 function barChart() {
@@ -155,3 +167,13 @@ function barChart() {
 }
  
 // barChart();
+// let total =0;
+function storage1 () {
+    let data = JSON.stringify(items);
+    localStorage.setItem('products',items);
+}
+function storage2 () {
+    let obj = JSON.parse(localStorage.getItem('products'));
+   total = total + ulEl
+    // render();
+}
