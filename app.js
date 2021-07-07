@@ -133,8 +133,8 @@ else {
   img1.removeEventListener('click', interaction);
   img2.removeEventListener('click',interaction);
   img3.removeEventListener('click',interaction); 
-let data = JSON.stringify(items);
-localStorage.setItem('solditems', data);
+  storage1();
+
 barChart();
 
   
@@ -144,7 +144,8 @@ barChart();
     
   
 }
- saveStorage ();
+
+ storage2();
 
 function barChart() {
     let ctx = document.getElementById('barchart').getContext('2d');
@@ -196,17 +197,21 @@ function barChart() {
 //     let obj = JSON.parse(localStorage.getItem('products'));
    
 // }
-function saveStorage () {
+function storage1(){
+let data = JSON.stringify(items);
+localStorage.setItem('solditems', data);}
+
+
+function storage2 () {
     if(localStorage.solditems) {
       let strItems = localStorage.getItem('solditems');
       items= JSON.parse(strItems);
     } else {
        
-        for (let i=0; i<images.length; i++) {
-            new Solditems(images[i])
+        items;
         }
         
     }
-  }
+  
 
   
