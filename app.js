@@ -133,6 +133,7 @@ else {
   img1.removeEventListener('click', interaction);
   img2.removeEventListener('click',interaction);
   img3.removeEventListener('click',interaction); 
+
   storage1();
 
 barChart();
@@ -203,13 +204,14 @@ localStorage.setItem('solditems', data);}
 
 
 function storage2 () {
-    if(localStorage.solditems) {
-      let strItems = localStorage.getItem('solditems');
-      items= JSON.parse(strItems);
-    } else {
-       
-        items;
-        }
+   
+   let obj = JSON.parse(localStorage.getItem('solditems'));
+   if (obj !==null) {
+       items=obj
+   }
+   else {
+       items;
+   }
         
     }
   
