@@ -13,6 +13,7 @@ let shows =[];
 let total=0;
 
 
+
 function Solditems(itemName) {
     this.name = itemName.split('.')[0];
     this.img = 'img/' + itemName;
@@ -28,6 +29,7 @@ function Solditems(itemName) {
 
 
 let images = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfast.jpg','bubblegum.jpg','chair.jpg','cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg','unicorn.jpg','water-can.jpg','wine-glass.jpg'];
+
 
 for (let i=0; i<images.length; i++) {
     new Solditems(images[i])
@@ -66,21 +68,25 @@ function render() {
     currentImg[0]=firstImg;
     currentImg[1]=secondImg;
      currentImg[2]=thirdImg;
-     if (rounds===maxRounds) {
-        img1.removeEventListener('click', interaction);
-        img2.removeEventListener('click',interaction);
-        img3.removeEventListener('click',interaction);
-         storage1();
-         storage2
-         ulEl2.textContent=null;
-         total = total + ulEl;
-     }
+    //  if (rounds===maxRounds) {
+    //     img1.removeEventListener('click', interaction);
+    //     img2.removeEventListener('click',interaction);
+    //     img3.removeEventListener('click',interaction);
+    //      storage1();
+    //      storage2
+    //      ulEl2.textContent=null;
+    //      total = total + ulEl2;
+    //  }
     
 }
 
 
 render ();
 
+
+
+
+  
 img1.addEventListener('click',interaction);
 img2.addEventListener('click',interaction);
 img3.addEventListener('click',interaction);
@@ -99,13 +105,14 @@ else if (chosen1==='thirdImg') {
 render();
 }
 else {
+    // let total=0;
     let divEl2=document.getElementById('container2')
+    let ulEl=document.createElement('ul');
     let button = document.getElementById('button');
     button.addEventListener('click',Results);
     function Results(event) {
         
-        let ulEl=document.createElement('ul');
-        window.ulEl2=ulEl;
+        // let ulEl=document.createElement('ul');
         divEl2.appendChild(ulEl);
         for (let i=0; i<items.length; i++) {
             let liEl=document.createElement('li')
@@ -113,19 +120,31 @@ else {
             ulEl.appendChild(liEl);
             votes.push(items[i].clicks);
             shows.push(items[i].views);
+            // storage1();
+            
+
         }
         
+        
+        
        button.removeEventListener('click',Results);
+       
     }
   img1.removeEventListener('click', interaction);
   img2.removeEventListener('click',interaction);
   img3.removeEventListener('click',interaction); 
-  barChart();
+let data = JSON.stringify(items);
+localStorage.setItem('solditems', data);
+barChart();
 
+  
   }
+  
   rounds++;
+    
   
 }
+ saveStorage ();
 
 function barChart() {
     let ctx = document.getElementById('barchart').getContext('2d');
@@ -165,15 +184,29 @@ function barChart() {
         }
     });
 }
+
  
 // barChart();
 // let total =0;
-function storage1 () {
-    let data = JSON.stringify(items);
-    localStorage.setItem('products',items);
-}
-function storage2 () {
-    let obj = JSON.parse(localStorage.getItem('products'));
-   total = total + ulEl
-    // render();
-}
+// function storage1 () {
+//     let data = JSON.stringify(items);
+//     localStorage.setItem('products',items);
+// }
+// function storage2 () {
+//     let obj = JSON.parse(localStorage.getItem('products'));
+   
+// }
+function saveStorage () {
+    if(localStorage.solditems) {
+      let strItems = localStorage.getItem('solditems');
+      items= JSON.parse(strItems);
+    } else {
+       
+        for (let i=0; i<images.length; i++) {
+            new Solditems(images[i])
+        }
+        
+    }
+  }
+
+  
